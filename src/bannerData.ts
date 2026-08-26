@@ -7,6 +7,7 @@ export interface BannerData {
   descricao?: string;
   botaoTexto: string;
   link?: string;
+  beneficios: string[];
 }
 
 export const CATEGORIAS = [
