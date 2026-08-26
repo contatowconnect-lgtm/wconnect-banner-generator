@@ -10,11 +10,13 @@ export interface BannerData {
 }
 
 export const CATEGORIAS = [
-  { id: 'eletronicos', nome: 'Eletrônicos', cor: '#2563EB' },
-  { id: 'moda', nome: 'Moda', cor: '#DC2626' },
-  { id: 'casa', nome: 'Casa', cor: '#059669' },
-  { id: 'beleza', nome: 'Beleza', cor: '#D97706' },
-  { id: 'esportes', nome: 'Esportes', cor: '#7C3AED' },
+ { id: 'eletronicos', nome: 'Eletrônico', cor: '#C6FF00' },
+{ id: 'informatica', nome: 'Informática', cor: '#B0B3B8' },
+{ id: 'games', nome: 'Game', cor: '#39FF14' },
+{ id: 'moda', nome: 'Moda', cor: '#FF1F8F' },
+{ id: 'casa', nome: 'Casa', cor: '#C1502E' },
+{ id: 'beleza', nome: 'Beleza', cor: '#FF8FA3' },
+{ id: 'esportes', nome: 'Esporte', cor: '#FF6B00' },
 ] as const;
 
 export type CategoriaId = typeof CATEGORIAS[number]['id'];
