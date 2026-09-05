@@ -1,26 +1,25 @@
 export const skins = {
   padrao: {
-    fundo: '#ffffff',
-    texto: '#1f2937',
-    destaque: '#2563eb',
-    botaoFundo: '#2563eb',
-    botaoTexto: '#ffffff',
+    fundo: '#0A0B10',
+    texto: '#F2F4F8',
+    destaque: '#2E6BFF',
+    botaoFundo: '#7B3FE4',
+    botaoTexto: '#F2F4F8',
   },
   escuro: {
-    fundo: '#1f2937',
-    texto: '#ffffff',
-    destaque: '#f59e0b',
-    botaoFundo: '#f59e0b',
-    botaoTexto: '#1f2937',
+    fundo: '#0A0B10',
+    texto: '#F2F4F8',
+    destaque: '#00D9FF',
+    botaoFundo: '#2E6BFF',
+    botaoTexto: '#F2F4F8',
   },
   promocao: {
-    fundo: '#dc2626',
-    texto: '#ffffff',
-    destaque: '#fef08a',
-    botaoFundo: '#ffffff',
-    botaoTexto: '#dc2626',
+    fundo: '#0A0B10',
+    texto: '#F2F4F8',
+    destaque: '#FFC300',
+    botaoFundo: '#7B3FE4',
+    botaoTexto: '#F2F4F8',
   },
 } as const;
 
 export type SkinId = keyof typeof skins;
-
