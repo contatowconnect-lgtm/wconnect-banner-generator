@@ -102,7 +102,21 @@ color: var(--waynne-text); padding: 30px; border-radius: 12px; box-shadow: 0 2px
             <option value={cat.id}>{cat.nome}</option>
           ))}
         </select>
-        
+        <label>Imagem do Produto (URL):</label>
+<input type="url" value={produtoExemplo.imagemProduto} />
+
+<label>Descrição / Destaque:</label>
+<input type="text" value={produtoExemplo.descricao} />
+
+<label>Texto do Botão:</label>
+<input type="text" value={produtoExemplo.botaoTexto} />
+
+<label>Link / Oferta (opcional):</label>
+<input type="url" value={produtoExemplo.link} />
+
+<label>8 Benefícios (um por linha):</label>
+<textarea rows="8">{produtoExemplo.beneficios.join('\n')}</textarea>
+
         <button>Atualizar Banner</button>
       </div>
     </div>
