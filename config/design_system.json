@@ -1,0 +1,24 @@
+{
+  "canvas_size": [1080, 1080],
+  "dpi": 72,
+  "margins": {
+    "safe_top": 80,
+    "safe_bottom": 80,
+    "safe_left": 60,
+    "safe_right": 60
+  },
+  "fonts": {
+    "title": {"file": "config/fonts/BoldFont.ttf", "size": 72},
+    "price": {"file": "config/fonts/BoldFont.ttf", "size": 96},
+    "category": {"file": "config/fonts/RegularFont.ttf", "size": 48}
+  },
+  "skins": {
+    "INFORMATICA": {"primary": "#3B82F6", "accent": "#7C3AED", "bg_tint": "#0A0B10"},
+    "GAME": {"primary": "#00FF00", "accent": "#00FFFF", "bg_tint": "#050505"},
+    "ELETRONICO": {"primary": "#CCFF00", "accent": "#FFFFFF", "bg_tint": "#0A0A0A"},
+    "MODA": {"primary": "#FF00FF", "accent": "#FF69B4", "bg_tint": "#1A0510"},
+    "CASA": {"primary": "#E07A5F", "accent": "#F2CC8F", "bg_tint": "#1A1005"},
+    "BELEZA": {"primary": "#FF69B4", "accent": "#FFB6C1", "bg_tint": "#1A0510"},
+    "ESPORTE": {"primary": "#FF8C00", "accent": "#FFD700", "bg_tint": "#0A0800"}
+  }
+}
