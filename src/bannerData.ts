@@ -7,15 +7,13 @@ export const CATEGORIAS = [
   "alimentacao",
   "servicos",
   "outros"
-] as const;
-
-export type CategoriaId = typeof CATEGORIAS[number];
+];
 
 export interface BannerData {
   produto: string;
   preco: string;
   precoAntigo?: string;
-  categoria: CategoriaId;
+  categoria: string;
   imagemProduto: string;
   descricao: string;
   botaoTexto: string;
