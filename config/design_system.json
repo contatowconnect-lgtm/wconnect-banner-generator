@@ -1,5 +1,5 @@
 {
-  "version": "v1.7.1",
+  "version": "v1.7.2",
   "system_name": "WAYNNE AI DESIGN SYSTEM — WADS",
   "identity": {
     "logo_text": "WAYNNE AI",
@@ -9,30 +9,22 @@
       "violeta": "#7B3FE4",
       "ciano": "#00D9FF"
     },
-    "fonts": [
-      "Space Grotesk",
-      "Inter",
-      "JetBrains Mono"
-    ]
+    "fonts": ["Space Grotesk", "Inter", "JetBrains Mono"]
   },
   "categories": {
-    "Eletrônico": { "color": "#C6FF00", "skin": "Lima" },
-    "Informática": { "color": "#0B03B8", "skin": "Padrão" },
-    "Game": { "color": "#39FF14", "skin": "Verde Neon" },
-    "Moda": { "color": "#FF1FBF", "skin": "Magenta" },
-    "Casa": { "color": "#C1502E", "skin": "Terracota" },
-    "Beleza": { "color": "#FFB3A3", "skin": "Rosa" },
-    "Esporte": { "color": "#FFB600", "skin": "Laranja" }
+    "eletronicos": { "color": "#C6FF00", "skin": "Lima" },
+    "Game":        { "color": "#39FF14", "skin": "Verde Neon" },
+    "Moda":        { "color": "#FF1FBF", "skin": "Magenta" },
+    "Casa":        { "color": "#C1502E", "skin": "Terracota" },
+    "Beleza":      { "color": "#FFB3A3", "skin": "Rosa" },
+    "esportes":    { "color": "#FFB600", "skin": "Laranja" }
   },
   "layout": {
     "formats": {
       "1:1": { "width": 1080, "height": 1080 },
       "4:5": { "width": 1080, "height": 1350 }
     },
-    "margins": {
-      "safe_area": 40,
-      "protection": 80
-    }
+    "margins": { "safe_area": 40, "protection": 80 }
   },
   "template_structure": {
     "tag_categoria": "top_left",
@@ -47,12 +39,10 @@
     "footer": "bottom"
   },
   "rules": {
-    "never_invent": [
-      "preço", "desconto", "especificação", "benefício",
-      "pagamento", "garantia", "disponibilidade"
-    ],
+    "never_invent": ["preço", "desconto", "especificação", "benefício", "pagamento"],
     "no_reposition": true,
     "no_new_categories": true,
     "no_skin_mix": true
   }
 }
+
