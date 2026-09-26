@@ -1,8 +1,6 @@
-fastapi==0.109.2
-uvicorn[standard]==0.27.1
-python-multipart==0.0.9
-Pillow==10.2.0
-rembg[cpu]==2.0.53
-httpx==0.26.0
-openai==1.12.0
-pydantic==2.6.1
+fastapi
+uvicorn
+pillow>=10.0.0
+openai
+python-multipart
+rembg
