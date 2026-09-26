@@ -26,9 +26,9 @@ const tamanho = "feed";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Waynne AI - Gerador de Banners</title>
+  <title>Waynne AI – Gerador de Banners</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --wayne-bg: #0A0B10;
@@ -37,92 +37,92 @@ const tamanho = "feed";
       --wayne-violet: #7B3FE4;
       --wayne-text: #F2F4F8;
       --wayne-muted: #8991A6;
-      --wayne-line: #232733;
     }
-
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--wayne-bg);
       color: var(--wayne-text);
       margin: 0;
       padding: 20px;
+      line-height: 1.5;
     }
-
     .container {
       max-width: 600px;
       margin: 0 auto;
     }
-
     h1 {
+      text-align: center;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
       background: linear-gradient(90deg, var(--wayne-blue), var(--wayne-violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 30px;
     }
-
     .form-card {
       background: var(--wayne-panel);
-      padding: 2rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      border: 1px solid var(--wayne-line);
+      padding: 25px;
+      border-radius: 16px;
+      margin-bottom: 30px;
     }
-
+    .form-card h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
     label {
       display: block;
-      margin: 1rem 0 0.3rem;
-      font-weight: 500;
-      font-size: 0.95rem;
+      margin: 15px 0 5px;
+      font-size: 14px;
+      color: var(--wayne-muted);
     }
-
     input, select, textarea {
       width: 100%;
-      padding: 0.8rem;
-      border-radius: 6px;
-      border: 1px solid var(--wayne-line);
-      background: var(--wayne-bg);
+      padding: 10px 12px;
+      background: #1A1C25;
+      border: none;
+      border-radius: 8px;
       color: var(--wayne-text);
-      font-size: 1rem;
-      box-sizing: border-box;
+      font-size: 15px;
     }
-
     button {
-      margin-top: 1.5rem;
-      padding: 1rem 2rem;
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
       background: linear-gradient(90deg, var(--wayne-blue), var(--wayne-violet));
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+      border-radius: 10px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      width: 100%;
     }
-
     .preview {
-      margin-top: 2rem;
+      margin-top: 30px;
+    }
+    .preview h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>WAYNNE AI — Gerador de Banners</h1>
-    
+
     <div class="form-card">
       <h2>Dados do Produto</h2>
-      
+
       <label for="produto">Nome do Produto</label>
       <input type="text" id="produto" value={produtoExemplo.produto} />
-      
+
       <label for="preco">Preço</label>
       <input type="text" id="preco" value={produtoExemplo.preco} />
-      
+
       <label for="precoAntigo">Preço Antigo (opcional)</label>
       <input type="text" id="precoAntigo" value={produtoExemplo.precoAntigo} />
-      
+
       <label for="categoria">Categoria</label>
       <select id="categoria">
         {CATEGORIAS.map(cat => (
@@ -131,14 +131,14 @@ const tamanho = "feed";
           </option>
         ))}
       </select>
-      
+
       <label for="descricao">Descrição / Chamada</label>
       <textarea id="descricao" rows="3">{produtoExemplo.descricao}</textarea>
-      
+
       <label for="imagemProduto">URL da Imagem do Produto</label>
       <input type="url" id="imagemProduto" value={produtoExemplo.imagemProduto} />
-      
-      <button>Gerar Banner</button>
+
+      <button id="btnGerar">Gerar Banner</button>
     </div>
 
     <div class="preview">
@@ -146,5 +146,13 @@ const tamanho = "feed";
       <RenderEngine dados={produtoExemplo} tamanho={tamanho} />
     </div>
   </div>
+
+<script>
+  const botaoGerar = document.getElementById('btnGerar');
+  botaoGerar?.addEventListener('click', () => {
+    const nomeProduto = document.getElementById('produto')?.value;
+    alert(`✅ Banner de "${nomeProduto}" pronto! 🎉`);
+  });
+</script>
 </body>
 </html>
