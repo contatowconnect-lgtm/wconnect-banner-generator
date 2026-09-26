@@ -7,9 +7,13 @@ interface RenderEngineProps {
 }
 
 export function RenderEngine({ dados, tamanho }: RenderEngineProps) {
+  if (!dados) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div className="render-engine">
-      <MasterTemplate dados={dados} tamanho={tamanho} />
+      <MasterTemplate produto={dados} tamanho={tamanho} />
     </div>
   );
 }
@@ -21,4 +25,3 @@ export async function gerarBannerComoImagem(
   console.log('Gerando banner:', dados.produto, 'no tamanho:', tamanho);
   return null;
 }
-
