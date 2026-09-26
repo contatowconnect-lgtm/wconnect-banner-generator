@@ -1,30 +1,26 @@
-export const skins = {
-  padrao: {
-    fundo: '#0A0B10',
-    texto: '#F2F4F8',
-    destaque: '#2E6BFF',
-    panel: '#12141C',
-    botaoFundo: '#7B3FE4',
-    botaoTexto: '#FFFFFF'
-  },
+type SkinConfig = {
+  [key: string]: {
+    cor: string;
+    nomeExibicao: string;
+  };
+};
 
-  escuro: {
-    fundo: '#0A0B10',
-    texto: '#F2F4F8',
-    destaque: '#00D9FF',
-    panel: '#12141C',
-    botaoFundo: '#7B3FE4',
-    botaoTexto: '#FFFFFF'
-  },
+// Tudo minúsculo = igual ao formulário → combina direto!
+const skins: SkinConfig = {
+  eletronicos: { cor: "#C6FF00", nomeExibicao: "ELETRÔNICOS" },
+  moda:        { cor: "#FF1FBF", nomeExibicao: "MODA" },
+  casa:        { cor: "#FF9100", nomeExibicao: "CASA" },
+  beleza:      { cor: "#FF80AB", nomeExibicao: "BELEZA" },
+  game:        { cor: "#39FF14", nomeExibicao: "GAME" },
+  esportes:    { cor: "#FFC107", nomeExibicao: "ESPORTES" }
+};
 
-  promocao: {
-    fundo: '#0A0B10',
-    texto: '#F2F4F8',
-    destaque: '#FFC300',
-    panel: '#1A1720',
-    botaoFundo: '#2E6BFF',
-    botaoTexto: '#FFFFFF'
-  }
-} as const;
-
-export type SkinId = keyof typeof skins;
+export function getSkin(categoria: string) {
+  // Converte pra minúsculo e remove acentos → não tem erro de digitação!
+  const chave = categoria
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  
+  return skins[chave] || skins.eletronicos; // Padrão = eletrônicos
+}
