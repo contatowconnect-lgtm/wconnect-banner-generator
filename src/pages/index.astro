@@ -1,4 +1,3 @@
-
 ---
 import { RenderEngine } from '../renderEngine';
 import { CATEGORIAS } from '../bannerData';
@@ -15,12 +14,7 @@ const produtoExemplo = {
   beneficios: [
     "Benefício 1",
     "Benefício 2",
-    "Benefício 3",
-    "Benefício 4",
-    "Benefício 5",
-    "Benefício 6",
-    "Benefício 7",
-    "Benefício 8"
+    "Benefício 3"
   ]
 };
 
@@ -41,7 +35,6 @@ const tamanho = "feed";
       --wayne-panel: #12141C;
       --wayne-blue: #2E6BFF;
       --wayne-violet: #7B3FE4;
-      --wayne-cyan: #00D9FF;
       --wayne-text: #F2F4F8;
       --wayne-muted: #8991A6;
       --wayne-line: #232733;
@@ -56,13 +49,13 @@ const tamanho = "feed";
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-bottom: 2rem;
       background: linear-gradient(90deg, var(--wayne-blue), var(--wayne-violet));
       -webkit-background-clip: text;
@@ -70,7 +63,7 @@ const tamanho = "feed";
       background-clip: text;
     }
 
-    .form-group {
+    .form-card {
       background: var(--wayne-panel);
       padding: 2rem;
       border-radius: 12px;
@@ -82,6 +75,7 @@ const tamanho = "feed";
       display: block;
       margin: 1rem 0 0.3rem;
       font-weight: 500;
+      font-size: 0.95rem;
     }
 
     input, select, textarea {
@@ -92,6 +86,7 @@ const tamanho = "feed";
       background: var(--wayne-bg);
       color: var(--wayne-text);
       font-size: 1rem;
+      box-sizing: border-box;
     }
 
     button {
@@ -104,15 +99,11 @@ const tamanho = "feed";
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.02);
+      width: 100%;
     }
 
     .preview {
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -120,17 +111,17 @@ const tamanho = "feed";
   <div class="container">
     <h1>WAYNNE AI — Gerador de Banners</h1>
     
-    <div class="form-group">
+    <div class="form-card">
       <h2>Dados do Produto</h2>
       
       <label for="produto">Nome do Produto</label>
-      <input type="text" id="produto" placeholder="Ex: Smartphone Pro Max" value={produtoExemplo.produto} />
+      <input type="text" id="produto" value={produtoExemplo.produto} />
       
       <label for="preco">Preço</label>
-      <input type="text" id="preco" placeholder="R$ 99,90" value={produtoExemplo.preco} />
+      <input type="text" id="preco" value={produtoExemplo.preco} />
       
       <label for="precoAntigo">Preço Antigo (opcional)</label>
-      <input type="text" id="precoAntigo" placeholder="R$ 149,90" value={produtoExemplo.precoAntigo} />
+      <input type="text" id="precoAntigo" value={produtoExemplo.precoAntigo} />
       
       <label for="categoria">Categoria</label>
       <select id="categoria">
@@ -147,12 +138,12 @@ const tamanho = "feed";
       <label for="imagemProduto">URL da Imagem do Produto</label>
       <input type="url" id="imagemProduto" value={produtoExemplo.imagemProduto} />
       
-      <button type="button">Gerar Banner</button>
+      <button>Gerar Banner</button>
     </div>
 
     <div class="preview">
       <h2>Pré-visualização</h2>
-      <RenderEngine produto={produtoExemplo} tamanho={tamanho} />
+      <RenderEngine dados={produtoExemplo} tamanho={tamanho} />
     </div>
   </div>
 </body>
