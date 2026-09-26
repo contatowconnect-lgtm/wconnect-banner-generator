@@ -1,25 +1,12 @@
 import React from 'react';
-import type { SkinId } from './skins';
-
-interface Produto {
-  produto: string;
-  preco: string;
-  precoAntigo?: string;
-  categoria: string;
-  imagemProduto: string;
-  descricao: string;
-  botaoTexto: string;
-  link: string;
-  beneficios?: string[];
-}
+import type { BannerData } from './bannerData';
 
 interface Props {
-  produto: Produto;
-  skin?: SkinId;
+  produto: BannerData;
+  tamanho?: string;
 }
 
-export const MasterTemplate: React.FC<Props> = ({ produto, skin = 'padrao' }) => {
-  // Garante que produto existe antes de usar
+export const MasterTemplate: React.FC<Props> = ({ produto, tamanho = "feed" }) => {
   if (!produto) {
     return <div>Carregando...</div>;
   }
@@ -38,67 +25,118 @@ export const MasterTemplate: React.FC<Props> = ({ produto, skin = 'padrao' }) =>
 
   return (
     <div style={{
-      padding: '40px',
-      borderRadius: '16px',
       background: '#0A0B10',
       color: '#F2F4F8',
-      maxWidth: '600px',
-      margin: '0 auto'
+      borderRadius: '16px',
+      padding: '32px',
+      maxWidth: '500px',
+      margin: '0 auto',
+      fontFamily: "'Inter', sans-serif"
     }}>
+      {/* Categoria */}
       <span style={{
-        background: '#2E6BFF',
-        padding: '6px 12px',
-        borderRadius: '20px',
-        fontSize: '14px',
         display: 'inline-block',
-        marginBottom: '16px'
+        background: '#2E6BFF',
+        color: '#FFFFFF',
+        padding: '6px 14px',
+        borderRadius: '20px',
+        fontSize: '13px',
+        fontWeight: 600,
+        marginBottom: '20px',
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px'
       }}>
         {categoria}
       </span>
 
-      <h2 style={{ margin: '0 0 12px 0', fontSize: '28px' }}>
+      {/* Nome do Produto */}
+      <h3 style={{
+        fontFamily: "'Space Grotesk', sans-serif",
+        fontSize: '26px',
+        fontWeight: 700,
+        margin: '0 0 10px 0',
+        color: '#FFFFFF'
+      }}>
         {nomeProduto}
-      </h2>
+      </h3>
 
-      <p style={{ color: '#8991A6', marginBottom: '20px' }}>
+      {/* Descrição */}
+      <p style={{
+        color: '#8991A6',
+        fontSize: '15px',
+        margin: '0 0 20px 0',
+        lineHeight: '1.5'
+      }}>
         {descricao}
       </p>
 
-      <div style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '8px' }}>
-        {preco}
-      </div>
-
-      {precoAntigo && (
-        <div style={{ color: '#8991A6', textDecoration: 'line-through', marginBottom: '20px' }}>
-          {precoAntigo}
-        </div>
-      )}
-
-      <img 
-        src={imagemProduto} 
+      {/* Imagem do Produto */}
+      <img
+        src={imagemProduto}
         alt={nomeProduto}
-        style={{ width: '100%', height: 'auto', borderRadius: '8px', marginBottom: '24px' }}
+        style={{
+          width: '100%',
+          height: '200px',
+          objectFit: 'cover',
+          borderRadius: '12px',
+          marginBottom: '24px'
+        }}
       />
 
+      {/* Preços */}
+      <div style={{ marginBottom: '20px' }}>
+        <div style={{
+          fontSize: '32px',
+          fontWeight: 700,
+          color: '#FFFFFF',
+          fontFamily: "'Space Grotesk', sans-serif"
+        }}>
+          {preco}
+        </div>
+        {precoAntigo && (
+          <div style={{
+            color: '#6B7280',
+            textDecoration: 'line-through',
+            fontSize: '15px',
+            marginTop: '4px'
+          }}>
+            De {precoAntigo}
+          </div>
+        )}
+      </div>
+
+      {/* Benefícios */}
       {beneficios.length > 0 && (
-        <ul style={{ paddingLeft: '20px', marginBottom: '24px' }}>
+        <ul style={{
+          padding: '0 0 0 20px',
+          margin: '0 0 24px 0'
+        }}>
           {beneficios.map((b, i) => (
-            <li key={i} style={{ marginBottom: '4px' }}>{b}</li>
+            <li key={i} style={{
+              color: '#D1D5DB',
+              marginBottom: '6px',
+              fontSize: '14px'
+            }}>
+              {b}
+            </li>
           ))}
         </ul>
       )}
 
-      <a 
+      {/* Botão */}
+      <a
         href={link}
         style={{
           display: 'block',
           textAlign: 'center',
-          padding: '14px',
+          padding: '14px 24px',
           background: 'linear-gradient(90deg, #2E6BFF, #7B3FE4)',
-          color: 'white',
-          borderRadius: '8px',
+          color: '#FFFFFF',
+          borderRadius: '10px',
           textDecoration: 'none',
-          fontWeight: 'bold'
+          fontWeight: 600,
+          fontSize: '16px',
+          fontFamily: "'Space Grotesk', sans-serif"
         }}
       >
         {botaoTexto}
