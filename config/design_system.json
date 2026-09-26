@@ -1,24 +1,58 @@
 {
-  "canvas_size": [1080, 1080],
-  "dpi": 72,
-  "margins": {
-    "safe_top": 80,
-    "safe_bottom": 80,
-    "safe_left": 60,
-    "safe_right": 60
+  "version": "v1.7.1",
+  "system_name": "WAYNNE AI DESIGN SYSTEM — WADS",
+  "identity": {
+    "logo_text": "WAYNNE AI",
+    "tagline": "Tecnologia que te acompanha.",
+    "colors_institutional": {
+      "azul": "#2E6BFF",
+      "violeta": "#7B3FE4",
+      "ciano": "#00D9FF"
+    },
+    "fonts": [
+      "Space Grotesk",
+      "Inter",
+      "JetBrains Mono"
+    ]
   },
-  "fonts": {
-    "title": {"file": "config/fonts/BoldFont.ttf", "size": 72},
-    "price": {"file": "config/fonts/BoldFont.ttf", "size": 96},
-    "category": {"file": "config/fonts/RegularFont.ttf", "size": 48}
+  "categories": {
+    "Eletrônico": { "color": "#C6FF00", "skin": "Lima" },
+    "Informática": { "color": "#0B03B8", "skin": "Padrão" },
+    "Game": { "color": "#39FF14", "skin": "Verde Neon" },
+    "Moda": { "color": "#FF1FBF", "skin": "Magenta" },
+    "Casa": { "color": "#C1502E", "skin": "Terracota" },
+    "Beleza": { "color": "#FFB3A3", "skin": "Rosa" },
+    "Esporte": { "color": "#FFB600", "skin": "Laranja" }
   },
-  "skins": {
-    "INFORMATICA": {"primary": "#3B82F6", "accent": "#7C3AED", "bg_tint": "#0A0B10"},
-    "GAME": {"primary": "#00FF00", "accent": "#00FFFF", "bg_tint": "#050505"},
-    "ELETRONICO": {"primary": "#CCFF00", "accent": "#FFFFFF", "bg_tint": "#0A0A0A"},
-    "MODA": {"primary": "#FF00FF", "accent": "#FF69B4", "bg_tint": "#1A0510"},
-    "CASA": {"primary": "#E07A5F", "accent": "#F2CC8F", "bg_tint": "#1A1005"},
-    "BELEZA": {"primary": "#FF69B4", "accent": "#FFB6C1", "bg_tint": "#1A0510"},
-    "ESPORTE": {"primary": "#FF8C00", "accent": "#FFD700", "bg_tint": "#0A0800"}
+  "layout": {
+    "formats": {
+      "1:1": { "width": 1080, "height": 1080 },
+      "4:5": { "width": 1080, "height": 1350 }
+    },
+    "margins": {
+      "safe_area": 40,
+      "protection": 80
+    }
+  },
+  "template_structure": {
+    "tag_categoria": "top_left",
+    "logo": "top_center",
+    "trust_badge": "top_right",
+    "product_image": "center",
+    "product_name": "center_below_image",
+    "specs": "below_name",
+    "benefits": "sides",
+    "price_area": "bottom_left",
+    "cta": "bottom_right",
+    "footer": "bottom"
+  },
+  "rules": {
+    "never_invent": [
+      "preço", "desconto", "especificação", "benefício",
+      "pagamento", "garantia", "disponibilidade"
+    ],
+    "no_reposition": true,
+    "no_new_categories": true,
+    "no_skin_mix": true
   }
 }
