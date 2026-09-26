@@ -9,6 +9,8 @@ export const CATEGORIAS = [
   "outros"
 ];
 
+export type TamanhoBanner = "feed" | "stories" | "retangular";
+
 export interface BannerData {
   produto: string;
   preco: string;
