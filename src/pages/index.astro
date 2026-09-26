@@ -134,7 +134,11 @@ const tamanho = "feed";
       
       <label for="categoria">Categoria</label>
       <select id="categoria">
-        {CATEGORIAS.map(cat => <option value={cat} selected={cat === produtoExemplo.categoria}>{cat}</option>)}
+        {CATEGORIAS.map(cat => (
+          <option value={cat} selected={cat === produtoExemplo.categoria}>
+            {cat}
+          </option>
+        ))}
       </select>
       
       <label for="descricao">Descrição / Chamada</label>
@@ -143,10 +147,10 @@ const tamanho = "feed";
       <label for="imagemProduto">URL da Imagem do Produto</label>
       <input type="url" id="imagemProduto" value={produtoExemplo.imagemProduto} />
       
-      <button onclick="gerarBanner()">Gerar Banner</button>
+      <button type="button">Gerar Banner</button>
     </div>
 
-    <div class="preview" id="preview">
+    <div class="preview">
       <h2>Pré-visualização</h2>
       <RenderEngine produto={produtoExemplo} tamanho={tamanho} />
     </div>
