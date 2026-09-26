@@ -91,9 +91,9 @@ export const MasterTemplate: React.FC<Props> = ({ produto, tamanho = "feed" }) =
       </div>
 
       {beneficios.length > 0 && (
-        <ul style={{ padding: '0 0 0 20px', margin: '0 0 24px 0' }}>
+        <ul style={{ padding: '0', margin: '0 0 24px 0', listStyle: 'none' }}>
           {beneficios.map((b, i) => (
-            <li key={i} style={{ color: '#D1D5DB', marginBottom: '6px', listStyle: 'none', paddingLeft: '0' }}>
+            <li key={i} style={{ color: '#D1D5DB', marginBottom: '6px' }}>
               {b}
             </li>
           ))}
