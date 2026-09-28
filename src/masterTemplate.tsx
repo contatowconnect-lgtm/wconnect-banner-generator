@@ -1,5 +1,7 @@
+
 import React from 'react';
 import type { BannerData } from './bannerData';
+import { getSkin } from './skins';
 
 interface Props {
   produto: BannerData;
@@ -21,6 +23,8 @@ export const MasterTemplate: React.FC<Props> = ({ produto, tamanho = "feed" }) =
     beneficios = []
   } = produto;
 
+  const skin = getSkin(categoria);
+
   return (
     <div style={{
       background: '#0A0B10',
@@ -33,8 +37,8 @@ export const MasterTemplate: React.FC<Props> = ({ produto, tamanho = "feed" }) =
     }}>
       <span style={{
         display: 'inline-block',
-        background: '#2E6BFF',
-        color: '#FFF',
+        background: skin.cor,
+        color: '#000',
         padding: '6px 14px',
         borderRadius: '20px',
         fontSize: '13px',
@@ -42,7 +46,7 @@ export const MasterTemplate: React.FC<Props> = ({ produto, tamanho = "feed" }) =
         marginBottom: '20px',
         textTransform: 'uppercase'
       }}>
-        {categoria}
+        {skin.nomeExibicao}
       </span>
 
       <h3 style={{
