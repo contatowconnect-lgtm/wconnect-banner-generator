@@ -15,7 +15,7 @@ const skins: SkinConfig = {
 };
 
 export function getSkin(categoria: string) {
-  const chave = categoria
+  const chave = (categoria || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
