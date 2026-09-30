@@ -9,7 +9,7 @@ app = FastAPI(title="Waynne AI Banner Generator")
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 def ler_prompt():
-    with open("config/prompt_extracao.txt", "r", encoding="utf-8") as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "prompt_extracao.txt"), "r", encoding="utf-8") as f:
         return f.read()
 
 @app.post("/gerar-banner")
