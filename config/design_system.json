@@ -12,12 +12,13 @@
     "fonts": ["Space Grotesk", "Inter", "JetBrains Mono"]
   },
   "categories": {
-    "eletronicos": { "color": "#C6FF00", "skin": "Lima" },
-    "Game":        { "color": "#39FF14", "skin": "Verde Neon" },
-    "Moda":        { "color": "#FF1FBF", "skin": "Magenta" },
-    "Casa":        { "color": "#C1502E", "skin": "Terracota" },
-    "Beleza":      { "color": "#FFB3A3", "skin": "Rosa" },
-    "esportes":    { "color": "#FFB600", "skin": "Laranja" }
+    "eletronicos": { "label": "ELETRÔNICOS", "color": "#C6FF00", "skin": "Lima" },
+    "informatica": { "label": "INFORMÁTICA", "color": "#0B03B8", "skin": "Azul" },
+    "game": { "label": "GAME", "color": "#39FF14", "skin": "Verde Neon" },
+    "moda": { "label": "MODA", "color": "#FF1FBF", "skin": "Magenta" },
+    "casa": { "label": "CASA", "color": "#C1502E", "skin": "Terracota" },
+    "beleza": { "label": "BELEZA", "color": "#FFB3A3", "skin": "Rosa" },
+    "esportes": { "label": "ESPORTES", "color": "#FFB600", "skin": "Laranja" }
   },
   "layout": {
     "formats": {
@@ -40,9 +41,11 @@
   },
   "rules": {
     "never_invent": ["preço", "desconto", "especificação", "benefício", "pagamento"],
+    "omit_missing_data": true,
+    "product_must_remain_central": true,
+    "promo_price_larger": true,
     "no_reposition": true,
     "no_new_categories": true,
     "no_skin_mix": true
   }
 }
-
