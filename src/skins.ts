@@ -1,25 +1,23 @@
+import designSystem from "../config/design_system.json";
+
 type SkinConfig = {
-  [key: string]: {
-    cor: string;
-    nomeExibicao: string;
-  };
+  cor: string;
+  nomeExibicao: string;
 };
 
-const skins: SkinConfig = {
-  eletronicos: { cor: "#C6FF00", nomeExibicao: "ELETRÔNICOS" },
-  moda: { cor: "#FF1FBF", nomeExibicao: "MODA" },
-  casa: { cor: "#FF9100", nomeExibicao: "CASA" },
-  beleza: { cor: "#FF80AB", nomeExibicao: "BELEZA" },
-  game: { cor: "#39FF14", nomeExibicao: "GAME" },
-  esportes: { cor: "#FFC107", nomeExibicao: "ESPORTES" }
-};
+const skins: Record<string, SkinConfig> = Object.fromEntries(
+  Object.entries(designSystem.categories).map(([key, value]) => [
+    key,
+    { cor: value.color, nomeExibicao: value.label }
+  ])
+);
 
-export function getSkin(categoria: string) {
+export function getSkin(categoria: string): SkinConfig | null {
   const chave = (categoria || "")
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
-  
-  return skins[chave] || skins.eletronicos;
+
+  return skins[chave] ?? null;
 }
