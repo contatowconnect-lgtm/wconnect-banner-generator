@@ -7,10 +7,11 @@ import os
 import tempfile
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from openai import OpenAI
 
 from gerador import gerar_banner
+from validador import validar_banner
 
 
 app = FastAPI(title="WAYNNE AI Banner Generator")
@@ -50,7 +51,10 @@ def validar_contrato(dados: dict) -> None:
 
 
 @app.post("/gerar-banner")
-async def criar_banner(file: UploadFile = File(...)):
+async def criar_banner(
+    file: UploadFile = File(...),
+    formato: str | None = Form(None),
+):
     if file.content_type not in ALLOWED_TYPES:
         raise HTTPException(
             status_code=400,
@@ -96,6 +100,11 @@ async def criar_banner(file: UploadFile = File(...)):
         dados = json.loads(resp.choices[0].message.content or "{}")
         validar_contrato(dados)
 
+        if formato:
+            if formato not in {"1:1", "4:5"}:
+                raise HTTPException(status_code=400, detail="Formato deve ser 1:1 ou 4:5.")
+            dados["banner"]["formato"] = formato
+
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         with tempfile.NamedTemporaryFile(
             prefix="produto_",
@@ -107,6 +116,7 @@ async def criar_banner(file: UploadFile = File(...)):
             caminho_temp = temp.name
 
         caminho_banner = gerar_banner(dados, caminho_temp)
+        validacao = validar_banner(caminho_banner, dados["banner"]["formato"])
 
     except (json.JSONDecodeError, ValueError, RuntimeError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
