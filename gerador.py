@@ -16,13 +16,12 @@ Regras importantes:
 from __future__ import annotations
 
 import json
-import os
 import re
 import unicodedata
 from pathlib import Path
 from typing import Any
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont
 
 
 BASE_DIR = Path(__file__).resolve().parent
