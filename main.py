@@ -86,6 +86,14 @@ async def criar_banner(
                     "role": "user",
                     "content": [
                         {
+                            "type": "text",
+                            "text": (
+                                "Retorne somente o JSON canônico solicitado no prompt. "
+                                "O formato final será definido pelo campo formato do formulário, "
+                                "quando fornecido. Não invente dados."
+                            ),
+                        },
+                        {
                             "type": "image_url",
                             "image_url": {
                                 "url": f"data:{mime_type};base64,{b64_imagem}"
