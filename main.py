@@ -130,6 +130,7 @@ async def criar_banner(
 
     return {
         "status": "sucesso",
+        "validacao": validacao,
         "dados_extraidos": dados,
         "caminho_banner": caminho_banner,
     }
