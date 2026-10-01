@@ -118,6 +118,8 @@ async def criar_banner(
         caminho_banner = gerar_banner(dados, caminho_temp)
         validacao = validar_banner(caminho_banner, dados["banner"]["formato"])
 
+    except HTTPException:
+        raise
     except (json.JSONDecodeError, ValueError, RuntimeError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
