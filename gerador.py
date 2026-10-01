@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -63,6 +64,8 @@ def _font_regular(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
 
 def _normalize_category(value: str) -> str:
     value = (value or "").lower().strip()
+    value = unicodedata.normalize("NFD", value)
+    value = "".join(ch for ch in value if unicodedata.category(ch) != "Mn")
     return re.sub(r"[^a-z0-9]", "", value)
 
 
