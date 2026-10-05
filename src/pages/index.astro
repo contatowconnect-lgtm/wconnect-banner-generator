@@ -1,24 +1,13 @@
 ---
-import { RenderEngine } from '../renderEngine';
 import { CATEGORIAS } from '../bannerData';
 
 const produtoExemplo = {
-  produto: "Smartphone Pro Max",
-  preco: "R$ 2.499,00",
-  precoAntigo: "R$ 3.199,00",
+  produto: "",
+  preco: "",
+  precoAntigo: "",
   categoria: "eletronicos",
-  imagemProduto: "https://via.placeholder.com/500x200/1a1a2e/ffffff?text=Produto+Exemplo",
-  descricao: "Tecnologia de ponta com câmera profissional e bateria de longa duração",
-  botaoTexto: "Comprar Agora",
-  link: "#",
-  beneficios: [
-    "✅ Entrega rápida em todo Brasil",
-    "✅ Garantia de 1 ano",
-    "✅ Pagamento em até 12x sem juros"
-  ]
+  descricao: "",
 };
-
-const tamanho = "feed";
 ---
 
 <!DOCTYPE html>
@@ -26,132 +15,133 @@ const tamanho = "feed";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Waynne AI – Gerador de Banners</title>
+  <title>WAYNNE AI — Gerador de Banners</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --wayne-bg: #0A0B10;
-      --wayne-panel: #12141C;
-      --wayne-blue: #2E6BFF;
-      --wayne-violet: #7B3FE4;
-      --wayne-text: #F2F4F8;
-      --wayne-muted: #8991A6;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--wayne-bg);
-      color: var(--wayne-text);
-      margin: 0;
-      padding: 20px;
-      line-height: 1.5;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    h1 {
-      text-align: center;
-      font-family: 'Space Grotesk', sans-serif;
-      background: linear-gradient(90deg, var(--wayne-blue), var(--wayne-violet));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 30px;
-    }
-    .form-card {
-      background: var(--wayne-panel);
-      padding: 25px;
-      border-radius: 16px;
-      margin-bottom: 30px;
-    }
-    .form-card h2 {
-      margin-top: 0;
-      font-size: 18px;
-    }
-    label {
-      display: block;
-      margin: 15px 0 5px;
-      font-size: 14px;
-      color: var(--wayne-muted);
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px 12px;
-      background: #1A1C25;
-      border: none;
-      border-radius: 8px;
-      color: var(--wayne-text);
-      font-size: 15px;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(90deg, var(--wayne-blue), var(--wayne-violet));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .preview {
-      margin-top: 30px;
-    }
-    .preview h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
+    :root { --bg:#0A0B10; --panel:#12141C; --blue:#2E6BFF; --violet:#7B3FE4; --text:#F2F4F8; --muted:#8991A6; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:20px; background:var(--bg); color:var(--text); font-family:Inter,sans-serif; }
+    .container { max-width:760px; margin:0 auto; }
+    h1 { text-align:center; font-family:'Space Grotesk'; background:linear-gradient(90deg,var(--blue),var(--violet)); -webkit-background-clip:text; color:transparent; }
+    .card { background:var(--panel); border-radius:18px; padding:22px; margin:18px 0; }
+    label { display:block; margin:14px 0 6px; color:var(--muted); font-size:14px; }
+    input,select,textarea { width:100%; padding:12px; border:1px solid #252A38; border-radius:10px; background:#1A1C25; color:var(--text); font:inherit; }
+    input[type=file] { padding:10px; }
+    button { width:100%; margin-top:20px; padding:14px; border:0; border-radius:11px; background:linear-gradient(90deg,var(--blue),var(--violet)); color:#fff; font-weight:700; font-size:16px; cursor:pointer; }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    .status { min-height:24px; color:var(--muted); margin-top:12px; text-align:center; }
+    .results { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; }
+    .result { background:#0F1118; padding:12px; border-radius:14px; }
+    .result img { width:100%; display:block; border-radius:10px; }
+    .result a { display:block; margin-top:10px; text-align:center; color:#fff; text-decoration:none; padding:10px; border-radius:9px; background:#202536; }
+    .hint { color:var(--muted); font-size:13px; line-height:1.5; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <main class="container">
     <h1>WAYNNE AI — Gerador de Banners</h1>
 
-    <div class="form-card">
-      <h2>Dados do Produto</h2>
+    <section class="card">
+      <h2>1. Produto</h2>
+      <p class="hint">Envie a foto do produto. Os dados abaixo são opcionais: se ficarem vazios, a API poderá extrair o que estiver visível na imagem quando a chave da OpenAI estiver configurada.</p>
 
-      <label for="produto">Nome do Produto</label>
-      <input type="text" id="produto" value={produtoExemplo.produto} />
+      <label for="imagem">Imagem do produto *</label>
+      <input id="imagem" type="file" accept="image/png,image/jpeg,image/webp" />
 
-      <label for="preco">Preço</label>
-      <input type="text" id="preco" value={produtoExemplo.preco} />
+      <label for="produto">Nome do produto</label>
+      <input id="produto" value={produtoExemplo.produto} placeholder="Ex.: Samsung Odyssey G5" />
 
-      <label for="precoAntigo">Preço Antigo (opcional)</label>
-      <input type="text" id="precoAntigo" value={produtoExemplo.precoAntigo} />
+      <label for="preco">Preço atual</label>
+      <input id="preco" value={produtoExemplo.preco} placeholder="Ex.: R$ 1.999,00" />
+
+      <label for="precoAntigo">Preço anterior (opcional)</label>
+      <input id="precoAntigo" value={produtoExemplo.precoAntigo} placeholder="Ex.: R$ 2.499,00" />
 
       <label for="categoria">Categoria</label>
       <select id="categoria">
-        {CATEGORIAS.map(cat => (
-          <option value={cat} selected={cat === produtoExemplo.categoria}>
-            {cat}
-          </option>
-        ))}
+        {CATEGORIAS.map(cat => <option value={cat} selected={cat === produtoExemplo.categoria}>{cat}</option>)}
       </select>
 
-      <label for="descricao">Descrição / Chamada</label>
-      <textarea id="descricao" rows="3">{produtoExemplo.descricao}</textarea>
+      <label for="descricao">Descrição / chamada (opcional)</label>
+      <textarea id="descricao" rows="3" placeholder="Uma chamada curta, sem inventar informações."></textarea>
 
-      <label for="imagemProduto">URL da Imagem do Produto</label>
-      <input type="url" id="imagemProduto" value={produtoExemplo.imagemProduto} />
+      <button id="btnGerar" type="button">Gerar banners</button>
+      <div id="status" class="status"></div>
+    </section>
 
-      <button id="btnGerar">Gerar Banner</button>
-    </div>
-
-    <div class="preview">
-      <h2>Pré-visualização</h2>
-      <RenderEngine dados={produtoExemplo} tamanho={tamanho} />
-    </div>
-  </div>
+    <section id="resultados" class="card" hidden>
+      <h2>2. Resultado</h2>
+      <div class="results">
+        <div class="result">
+          <strong>1:1 — 1080 × 1080</strong>
+          <img id="preview11" alt="Banner 1:1 gerado" />
+          <a id="download11" download="waynne-banner-1080x1080.png">Baixar PNG</a>
+        </div>
+        <div class="result">
+          <strong>4:5 — 1080 × 1350</strong>
+          <img id="preview45" alt="Banner 4:5 gerado" />
+          <a id="download45" download="waynne-banner-1080x1350.png">Baixar PNG</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
 <script>
-  const botaoGerar = document.getElementById('btnGerar');
-  botaoGerar?.addEventListener('click', () => {
-    const nomeProduto = document.getElementById('produto')?.value;
-    alert(`✅ Banner de "${nomeProduto}" pronto! 🎉`);
+  const btn = document.getElementById('btnGerar');
+  const status = document.getElementById('status');
+  const resultados = document.getElementById('resultados');
+
+  const val = (id) => document.getElementById(id)?.value?.trim() || '';
+
+  btn?.addEventListener('click', async () => {
+    const input = document.getElementById('imagem');
+    const file = input?.files?.[0];
+
+    if (!file) {
+      status.textContent = 'Selecione uma imagem do produto primeiro.';
+      return;
+    }
+
+    btn.disabled = true;
+    status.textContent = 'Gerando os dois formatos…';
+    resultados.hidden = true;
+
+    const dados = {
+      produto: val('produto'),
+      preco_por: val('preco'),
+      preco_de: val('precoAntigo'),
+      categoria: val('categoria'),
+      chamada: val('descricao'),
+    };
+
+    const form = new FormData();
+    form.append('file', file);
+    if (Object.values(dados).some(Boolean)) form.append('dados', JSON.stringify(dados));
+
+    try {
+      const response = await fetch('/api/gerar-banner', { method: 'POST', body: form });
+      const payload = await response.json();
+
+      if (!response.ok) throw new Error(payload.detail || 'Não foi possível gerar o banner.');
+
+      for (const [formato, id, downloadId] of [
+        ['1:1', 'preview11', 'download11'],
+        ['4:5', 'preview45', 'download45']
+      ]) {
+        const base64 = payload.formatos[formato].base64;
+        const url = 'data:image/png;base64,' + base64;
+        document.getElementById(id).src = url;
+        document.getElementById(downloadId).href = url;
+      }
+
+      resultados.hidden = false;
+      status.textContent = 'Pronto. Os dois PNGs foram gerados pelo motor WADS.';
+    } catch (error) {
+      status.textContent = error?.message || 'Erro inesperado ao gerar.';
+    } finally {
+      btn.disabled = false;
+    }
   });
 </script>
 </body>
