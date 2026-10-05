@@ -3,4 +3,3 @@ uvicorn
 pillow>=10.0.0
 openai
 python-multipart
-rembg
