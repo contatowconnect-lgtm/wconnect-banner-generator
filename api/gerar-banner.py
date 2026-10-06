@@ -55,6 +55,7 @@ Schema:
 
 
 @app.post("/")
+@app.post("/api/gerar-banner")
 async def gerar(
     file: UploadFile = File(...),
     dados: str | None = Form(default=None),
