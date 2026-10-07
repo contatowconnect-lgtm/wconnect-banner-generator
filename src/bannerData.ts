@@ -1,12 +1,11 @@
 export const CATEGORIAS = [
   "eletronicos",
+  "informatica",
+  "game",
   "moda",
   "casa",
   "beleza",
-  "esportes",
-  "alimentacao",
-  "servicos",
-  "outros"
+  "esporte"
 ];
 
 export type TamanhoBanner = "feed" | "stories" | "retangular";
