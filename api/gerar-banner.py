@@ -37,7 +37,7 @@ Retorne somente JSON válido, sem markdown.
 Nunca invente preço, desconto, especificação ou benefício.
 Use strings vazias ou listas vazias quando a informação não estiver visível.
 Schema:
-{"produto":"string","marca":"string","categoria":"eletronicos|game|moda|casa|beleza|esportes","preco_de":"string","preco_por":"string","desconto":"string","especificacoes":["string"],"beneficios":["string"],"chamada":"string"}
+{"produto":"string","marca":"string","categoria":"eletronicos|informatica|game|moda|casa|beleza|esporte","preco_de":"string","preco_por":"string","desconto":"string","especificacoes":["string"],"beneficios":["string"],"chamada":"string"}
 """
     b64 = base64.b64encode(image_bytes).decode("utf-8")
     response = client.chat.completions.create(
@@ -67,6 +67,8 @@ async def gerar(
     produto = _dados_from_form(dados)
     if not produto:
         produto = _extrair_com_openai(image_bytes)
+    if produto.get("categoria") == "esportes":
+        produto["categoria"] = "esporte"
 
     banners = gerar_banners(produto, image_bytes)
 
