@@ -14,10 +14,12 @@ WADS = {
     },
     "categorias": {
         "eletronicos": "#C6FF00",
+        "informatica": "#B0B3B8",
         "game": "#39FF14",
-        "moda": "#FF1FBF",
+        "moda": "#FF1F8F",
         "casa": "#C1502E",
-        "beleza": "#FFB3A3",
+        "beleza": "#FF8FA3",
+        "esporte": "#FF6B00",
         "esportes": "#FF6B00",
     },
 }
@@ -100,6 +102,15 @@ def _render(dados, raw, formato):
 
     safe = 56
     category = str(dados.get("categoria", "eletronicos")).lower().strip()
+    aliases = {
+        "eletrônico": "eletronicos",
+        "eletronico": "eletronicos",
+        "eletrônicos": "eletronicos",
+        "informática": "informatica",
+        "esporte": "esporte",
+        "esportes": "esporte",
+    }
+    category = aliases.get(category, category)
     skin = WADS["categorias"].get(category, WADS["categorias"]["eletronicos"])
     skin_rgb = _hex(skin)
 
@@ -113,7 +124,16 @@ def _render(dados, raw, formato):
     f_footer = _font("Roboto-Regular.ttf", 18)
 
     # Category tag — fixed top-left position.
-    tag = str(dados.get("categoria", "ELETRÔNICOS")).upper()
+    tag_labels = {
+        "eletronicos": "ELETRÔNICOS",
+        "informatica": "INFORMÁTICA",
+        "game": "GAME",
+        "moda": "MODA",
+        "casa": "CASA",
+        "beleza": "BELEZA",
+        "esporte": "ESPORTE",
+    }
+    tag = tag_labels.get(category, str(dados.get("categoria", "ELETRÔNICOS")).upper())
     bbox = draw.textbbox((0, 0), tag, font=f_tag)
     tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
     draw.rounded_rectangle((safe, safe, safe + tw + 28, safe + th + 18), radius=18, fill=skin_rgb)
