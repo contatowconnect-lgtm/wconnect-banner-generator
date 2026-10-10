@@ -144,12 +144,9 @@ def _render(dados, raw, formato):
     lb = draw.textbbox((0, 0), logo, font=f_logo)
     draw.text(((width - (lb[2] - lb[0])) / 2, safe - 4), logo, font=f_logo, fill=_hex(WADS["institucional"]["texto"]))
 
-    # Trust badge top-right.
-    badge = "WADS"
-    bb = draw.textbbox((0, 0), badge, font=f_small)
-    bx = width - safe - (bb[2] - bb[0]) - 22
-    draw.rounded_rectangle((bx, safe, width - safe, safe + 42), radius=14, outline=_hex(WADS["institucional"]["ciano"]), width=2)
-    draw.text((bx + 11, safe + 9), badge, font=f_small, fill=_hex(WADS["institucional"]["ciano"]))
+    # Category identity: a clear accent line that carries the selected skin
+    # through the composition, without adding an internal WADS badge.
+    draw.rounded_rectangle((safe, 112, width - safe, 120), radius=4, fill=skin_rgb)
 
     # Central product area.
     hero_top = 165
