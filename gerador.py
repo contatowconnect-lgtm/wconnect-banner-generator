@@ -58,14 +58,26 @@ def _wrap(draw, text, font, max_width, max_lines=2):
     words = re.sub(r"\s+", " ", str(text or "")).strip().split()
     lines, current = [], ""
     for word in words:
-        candidate = f"{current} {word}".strip()
-        if _text_width(draw, candidate, font) <= max_width:
-            current = candidate
-        else:
-            if current:
-                lines.append(current)
-            # Prevent a single long token from drawing beyond the safe area.
-            current = word
+        # Break unusually long tokens so they cannot escape the safe area.
+        chunks, chunk = [], ""
+        for char in word:
+            candidate = chunk + char
+            if chunk and _text_width(draw, candidate, font) > max_width:
+                chunks.append(chunk)
+                chunk = char
+            else:
+                chunk = candidate
+        if chunk:
+            chunks.append(chunk)
+
+        for part in chunks:
+            candidate = f"{current} {part}".strip()
+            if _text_width(draw, candidate, font) <= max_width:
+                current = candidate
+            else:
+                if current:
+                    lines.append(current)
+                current = part
     if current:
         lines.append(current)
     if len(lines) > max_lines:
@@ -210,7 +222,7 @@ def _render(dados, raw, formato):
         _draw_fit(draw, " · ".join(parts), (82, price_top + 94),
                   width // 2 - 105, max_lines=2, max_size=15, min_size=11, fill=accent)
 
-    cta = str(dados.get("cta") or dados.get("botaoTexto") or dados.get("chamada") or "VER OFERTA →").strip()
+    cta = str(dados.get("cta") or dados.get("botaoTexto") or "VER OFERTA →").strip()
     cta_x, cta_y, cta_w, cta_h = width - 345, price_top + 43, 255, 66
     draw.rounded_rectangle((cta_x, cta_y, cta_x + cta_w, cta_y + cta_h),
                            radius=16, fill=_rgb(WADS["institucional"]["azul"]),
