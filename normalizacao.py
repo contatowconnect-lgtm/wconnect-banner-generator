@@ -48,6 +48,10 @@ def normalizar_beneficios(value: Any, limite: int = 8) -> list[str]:
     else:
         items = []
 
+    max_items = max(0, min(int(limite), 8))
+    if max_items == 0:
+        return []
+
     resultado: list[str] = []
     vistos: set[str] = set()
     for item in items:
@@ -59,7 +63,7 @@ def normalizar_beneficios(value: Any, limite: int = 8) -> list[str]:
             continue
         vistos.add(chave)
         resultado.append(texto[:90])
-        if len(resultado) >= max(0, min(int(limite), 8)):
+        if len(resultado) >= max_items:
             break
     return resultado
 
