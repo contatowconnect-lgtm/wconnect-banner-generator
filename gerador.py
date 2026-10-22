@@ -149,14 +149,17 @@ def _render(dados, raw, formato):
 
     title = str(dados.get("produto") or "Produto").strip()[:120]
     subtitle = str(dados.get("subtitulo") or dados.get("chamada") or "").strip()[:140]
-    _draw_fit(draw, title, (78, 118), width - 156, max_lines=2,
-              max_size=40, min_size=23, align="center")
+    title_end = _draw_fit(draw, title, (78, 118), width - 156, max_lines=2,
+                           max_size=40, min_size=23, align="center")
+    content_end = title_end
     if subtitle:
-        _draw_fit(draw, subtitle, (100, 205), width - 200, max_lines=2,
-                  max_size=22, min_size=15, fill=accent, align="center")
+        subtitle_y = max(title_end + 5, 190)
+        content_end = _draw_fit(draw, subtitle, (100, subtitle_y), width - 200,
+                                max_lines=2, max_size=22, min_size=15,
+                                fill=accent, align="center")
 
     # Região central dimensionada por formato, com foto real e sem placeholder.
-    hero_top = 285 if subtitle else 250
+    hero_top = max(270, content_end + 14)
     hero_bottom = 680 if formato == "1:1" else 875
     hero_width = 430
     hero_x = (width - hero_width) // 2
