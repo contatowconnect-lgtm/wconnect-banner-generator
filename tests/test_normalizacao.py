@@ -30,7 +30,7 @@ class TestNormalizacao(unittest.TestCase):
         self.assertTrue(all(resultado))
 
     def test_beneficios_string_e_convertida_em_lista(self):
-        self.assertEqual(normalizar_beneficios("Wi-Fi\\nBluetooth\\n\\nUSB-C"), ["Wi-Fi", "Bluetooth", "USB-C"])
+        self.assertEqual(normalizar_beneficios("Wi-Fi\nBluetooth\n\nUSB-C"), ["Wi-Fi", "Bluetooth", "USB-C"])
 
     def test_preco_brasileiro_com_virgula(self):
         self.assertEqual(parse_brl("R$ 1.459,90"), 1459.90)
