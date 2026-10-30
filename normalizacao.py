@@ -23,7 +23,7 @@ def _sem_acentos(value: str) -> str:
 
 def normalizar_categoria(value: Any) -> str:
     categoria = _sem_acentos(str(value or "").strip().lower())
-    categoria = re.sub(r"\\s+", " ", categoria)
+    categoria = re.sub(r"\s+", " ", categoria)
     aliases = {
         "eletronico": "eletronicos",
         "eletronicos": "eletronicos",
@@ -51,7 +51,7 @@ def normalizar_beneficios(value: Any, limite: int = 8) -> list[str]:
     resultado: list[str] = []
     vistos: set[str] = set()
     for item in items:
-        texto = re.sub(r"\\s+", " ", str(item or "")).strip()
+        texto = re.sub(r"\s+", " ", str(item or "")).strip()
         if not texto:
             continue
         chave = texto.casefold()
@@ -65,7 +65,7 @@ def normalizar_beneficios(value: Any, limite: int = 8) -> list[str]:
 
 
 def parse_brl(value: Any) -> float | None:
-    raw = str(value or "").strip().replace("R$", "").replace("\\u00a0", "").replace(" ", "")
+    raw = str(value or "").strip().replace("R$", "").replace("\u00a0", "").replace(" ", "")
     raw = re.sub(r"[^0-9,.-]", "", raw)
     if not raw or raw in {"-", ".", ","}:
         return None
@@ -118,7 +118,7 @@ def validar_dados_comerciais(dados: dict[str, Any]) -> dict[str, str]:
 
     desconto_raw = str(dados.get("desconto") or "").strip()
     if desconto_raw:
-        match = re.fullmatch(r"(\\d+(?:[.,]\\d+)?)\\s*%?", desconto_raw)
+        match = re.fullmatch(r"(\d+(?:[.,]\d+)?)\s*%?", desconto_raw)
         if not match:
             raise ValueError("O desconto deve ser informado como percentual numérico confirmado.")
         desconto = float(match.group(1).replace(",", "."))
