@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from PIL import Image, UnidentifiedImageError
 
 from gerador import gerar_banners
-from normalizacao import normalizar_categoria, normalizar_beneficios
+from normalizacao import normalizar_categoria, normalizar_beneficios, validar_dados_comerciais
 
 app = FastAPI(title="WAYNNE AI Banner Generator")
 
@@ -87,7 +87,12 @@ def _validar_imagem(image_bytes):
 
 def _normalizar_dados(raw):
     dados = dict(raw or {})
-    dados["categoria"] = normalizar_categoria(dados.get("categoria"))
+    try:
+        dados["categoria"] = normalizar_categoria(dados.get("categoria"))
+        comerciais = validar_dados_comerciais(dados)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    dados.update(comerciais)
     beneficios = dados.get("beneficios") or dados.get("especificacoes") or []
     dados["beneficios"] = normalizar_beneficios(beneficios)
     if not dados.get("produto"):
