@@ -29,7 +29,7 @@ class TestGeracaoBanners(unittest.TestCase):
 
     def test_foto_invalida_falha_com_erro_claro(self):
         with self.assertRaisesRegex(ValueError, "foto do produto"):
-            gerar_banners({"produto": "Teste"}, b"isto nao e imagem")
+            gerar_banners({"produto": "Teste", "categoria": "eletronicos"}, b"isto nao e imagem")
 
 
 if __name__ == "__main__":
