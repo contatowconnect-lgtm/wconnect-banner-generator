@@ -36,6 +36,8 @@ const produtoExemplo = {
     .result img { width:100%; display:block; border-radius:10px; }
     .result a { display:block; margin-top:10px; text-align:center; color:#fff; text-decoration:none; padding:10px; border-radius:9px; background:#202536; }
     .hint { color:var(--muted); font-size:13px; line-height:1.5; }
+    .benefit-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    @media (max-width:520px) { .benefit-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -65,6 +67,26 @@ const produtoExemplo = {
 
       <label for="descricao">Descrição / chamada (opcional)</label>
       <textarea id="descricao" rows="3" placeholder="Uma chamada curta, sem inventar informações."></textarea>
+
+      <label for="subtitulo">Subtítulo (opcional)</label>
+      <input id="subtitulo" placeholder="Ex.: Desempenho para o dia a dia" />
+
+      <label for="desconto">Desconto (opcional)</label>
+      <input id="desconto" placeholder="Ex.: 15% — informe apenas se confirmado" />
+
+      <label for="parcelas">Parcelamento (opcional)</label>
+      <input id="parcelas" placeholder="Ex.: 10x de R$ 199,90 sem juros" />
+
+      <label for="cta">Texto do botão (opcional)</label>
+      <input id="cta" placeholder="Ex.: VER OFERTA →" />
+
+      <label>Benefícios do produto (até 8, opcionais)</label>
+      <p class="hint">Preencha somente características confirmadas no anúncio ou catálogo. Campos vazios serão ignorados.</p>
+      <div class="benefit-grid">
+        {Array.from({ length: 8 }, (_, i) => (
+          <input id={`beneficio${i + 1}`} placeholder={`Benefício ${i + 1}`} aria-label={`Benefício ${i + 1}`} />
+        ))}
+      </div>
 
       <button id="btnGerar" type="button">Gerar banners</button>
       <div id="status" class="status"></div>
@@ -113,11 +135,21 @@ const produtoExemplo = {
       preco_de: val('precoAntigo'),
       categoria: val('categoria'),
       chamada: val('descricao'),
+      subtitulo: val('subtitulo'),
+      desconto: val('desconto'),
+      parcelas: val('parcelas'),
+      cta: val('cta'),
+      beneficios: Array.from({ length: 8 }, (_, i) => val('beneficio' + (i + 1))).filter(Boolean),
     };
 
     const form = new FormData();
     form.append('file', file);
-    if (Object.values(dados).some(Boolean)) form.append('dados', JSON.stringify(dados));
+    const hasManualData = Object.entries(dados).some(([key, value]) => {
+      if (key === 'categoria') return false;
+      if (key === 'beneficios') return value.length > 0;
+      return Boolean(value);
+    });
+    if (hasManualData) form.append('dados', JSON.stringify(dados));
 
     try {
       const response = await fetch('/api/gerar-banner', { method: 'POST', body: form });
